@@ -29,7 +29,9 @@ task(
     let winTimes = 0;
     let totalGas = 0;
     for (i = 0; i < runTimes; i++) {
-        // Check if player balance is more than 1 ether
+        console.log('Roll dice round                : ', i + 1);
+
+        // Check if player balance is less than 1 ether
         const balance = await hre.ethers.provider.getBalance(signerAddress);
         const signerBalance = ethers.formatEther(balance);
         console.log('Player balance is              : ', signerBalance);
@@ -45,7 +47,12 @@ task(
         }
 
         // Call rollDice function
-        const tx = await recreation.rollDice();
+        // const tx = await recreation.rollDice();    // 不指定 gas 会出错
+        const options = {
+            gasLimit: 1e7, // set the gas limit to 10,000,000
+            gasPrice: ethers.parseUnits('15', 'gwei'), // set the gas price to 15 gwei
+        };
+        const tx = await recreation.rollDice(options);
         const txHash = tx.hash;
         console.log('Transaction hash is            : ', txHash);
 

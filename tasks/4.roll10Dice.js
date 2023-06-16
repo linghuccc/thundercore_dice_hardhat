@@ -32,6 +32,11 @@ task(
 
     // Call roll10Dice function
     const tx = await transaction;
+    // const options = {
+    //     gasLimit: 10000000, // set the gas limit to 10,000,000
+    //     gasPrice: ethers.parseUnits('15', 'gwei'), // set the gas price to 15 gwei
+    // };
+    // const tx = await recreation.rollDice(options);
     const txHash = tx.hash;
     console.log('Transaction hash is            : ', txHash);
 

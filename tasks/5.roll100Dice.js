@@ -25,13 +25,13 @@ task(
         recreationAddress
     );
 
-    // Get estimate gas for the transaction
-    const transaction = recreation.roll100Dice();
-    const estimateGas = await ethers.provider.estimateGas(transaction);
-    console.log('Estimate gas is                : ', estimateGas.toString());
-
     // Call roll100Dice function
-    const tx = await transaction;
+    // make sure gasLimit * gasPrice > actual gas used
+    const options = {
+        gasLimit: 1e7, // set the gas limit, can not exceed block gas limit
+        gasPrice: ethers.parseUnits('900', 'gwei'), // set the gas price to 150 gwei
+    };
+    const tx = await recreation.roll100Dice(options);
     const txHash = tx.hash;
     console.log('Transaction hash is            : ', txHash);
 

@@ -24,8 +24,8 @@ contract Recreation is Ownable {
     uint256 public constant BONUS = 10;
 
     /***    hardhat task 相关参数    ***/
-    uint8 private winCondition = 0; // 0 为 未赋值；1 为 Win；2为 Lose
-    uint8 private winNumber = 101; // 101 为 未赋值
+    bool private isWin;
+    uint8 private winNumber;
 
     /***     获奖者名单的相关参数     ***/
     address[] private winners;
@@ -61,8 +61,8 @@ contract Recreation is Ownable {
     }
 
     /***      hardhat task 相关函数       ***/
-    function getSingleResult() external view returns (uint8) {
-        return winCondition;
+    function getSingleResult() external view returns (bool) {
+        return isWin;
     }
 
     function getResults() external view returns (uint8) {
@@ -77,9 +77,6 @@ contract Recreation is Ownable {
         // 当奖金用完时，游戏结束
         uint256 reward = BONUS * 10 ** DIGITS;
         require(tcUSD.balanceOf(address(this)) >= reward, "Game over");
-
-        // 重置 winCondition
-        winCondition = 0;
 
         // 从 ThunderCore 随机数合约得到随机数，并将其转换为 1~6 之间的一个数
         uint8 diceNumber = uint8((RNGLibrary.rand() % 6) + 1);
@@ -98,11 +95,11 @@ contract Recreation is Ownable {
             winCount[msg.sender]++;
             tcUSD.transfer(msg.sender, reward);
 
-            winCondition = 1;
+            isWin = true;
             emit Win(msg.sender, diceNumber);
             // 如果该数为 1, 2, 3, 则发送 Lose 事件
         } else {
-            winCondition = 2;
+            isWin = false;
             emit Lose(msg.sender, diceNumber);
         }
     }
@@ -118,9 +115,6 @@ contract Recreation is Ownable {
             tcUSD.balanceOf(address(this)) >= rewardMax,
             "Not enough reward"
         );
-
-        // 重置 winNumber
-        winNumber = 101;
 
         uint8 winTimes = 0;
         for (uint i = 0; i < 10; i++) {
@@ -151,7 +145,7 @@ contract Recreation is Ownable {
         emit Win(msg.sender, winTimes);
     }
 
-    /***      测试用函数：掷骰子100次      ***/
+    /***  测试用函数：掷骰子100次 (实际无法运行)  ***/
     function roll100Dice() external {
         // 只允许外部账户调用本函数，不允许合约账户调用
         require(msg.sender == tx.origin, "No contract address allowed");
@@ -162,9 +156,6 @@ contract Recreation is Ownable {
             tcUSD.balanceOf(address(this)) >= rewardMax,
             "Not enough reward"
         );
-
-        // 重置 winNumber
-        winNumber = 101;
 
         uint8 winTimes = 0;
         for (uint i = 0; i < 100; i++) {

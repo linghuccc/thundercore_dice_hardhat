@@ -33,10 +33,10 @@ task('3.rollDice', 'Run rollDice function of Recreation contract').setAction(
 
         // Call rollDice function
         // const options = {
-        //     gasLimit: 2 * Number(estimateGas), // set the gas limit to 100,000
-        //     gasPrice: ethers.parseUnits('100', 'gwei'), // set the gas price to 100 gwei
+        //     gasLimit: 10000000, // set the gas limit to 10,000,000
+        //     gasPrice: ethers.parseUnits('15', 'gwei'), // set the gas price to 15 gwei
         // };
-        // const rollDice = await recreation.rollDice(options);
+        // const tx = await recreation.rollDice(options);
         const tx = await transaction;
         const txHash = tx.hash;
         console.log('Transaction hash is            : ', txHash);

@@ -8,21 +8,25 @@
   </tr>
   <tr>
     <td>TCUSD</td>
-    <td>0x8130219E72ccdEF637756c5d8eb5f3Cf0ea85CB0</td>
-    <td>0x07ae2e532bdc718459e6ce539ab10cecd61af33545ded98af4f0b563e9d81384</td>
+    <td>0xaCe55329Fb369f65548B4cE8f70982f016BdbC42</td>
+    <td>0x63df5e08986b8d842900f010f13dd230ea51eaad2598a4ba40b887a07b17d635</td>
   </tr>
   <tr>
     <td>Recreation</td>
-    <td>0x1636ff0D4212Ea755D96cE88F4c0460aa29126E8</td>
-    <td>0x2d494765956a23fccc998625f544ffc8f720dc5ff05ffec4064ae520bd54c037</td>
+    <td>0x8D5BfB1DBF84701Ebe94fb35cc3698e023Cdf2B4</td>
+    <td>0xa3cce72c8d223bc33077b3a5debf1661ab1fd5006e64037be79265905365d4b0</td>
   </tr>
 </table>
 
 具体功能参见 Recreation.sol 注释部分；
 
-下面功能参见 tasks/8.getWinnerMetrics.js
+下面功能，请参见 tasks/8.getWinnerMetrics.js
 
 Record user metrics
 
 -   Who wins the most of tokens
 -   The number of win counts for each user
+
+下图为执行该 task 之后得到的结果：
+
+![Winner Metrics](metrics.jpg)

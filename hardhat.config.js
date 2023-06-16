@@ -22,7 +22,9 @@ module.exports = {
             url: 'https://testnet-rpc.thundercore.com',
             chainId: 18,
             gasPrice: 15e9,
-            accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+            accounts: process.env.ACCOUNT2_PRIVATE_KEY
+                ? [process.env.ACCOUNT2_PRIVATE_KEY]
+                : [],
         },
         'thunder-mainnet': {
             url: 'https://mainnet-rpc.thundercore.com',

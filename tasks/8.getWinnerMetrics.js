@@ -40,7 +40,9 @@ task(
         }));
 
         // Sort the results by win count in descending order
-        addressWinCounts.sort((a, b) => b.winCount - a.winCount);
+        addressWinCounts.sort(
+            (a, b) => Number(b.winCount) - Number(a.winCount)
+        );
 
         // Print the results
         addressWinCounts.forEach((entry) => {
